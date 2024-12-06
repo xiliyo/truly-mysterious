@@ -20,12 +20,15 @@
 
 /*VARIABLES---------------------------------------------------------*/ 
 
+// Initialize for later images
+let img;
+
 // Canvas size for modular coding
 let canvasX = '1000';
 let canvasY = '541';
 
 // States for each screen of the game
-let state = "title";
+let state = 'title';
 
 const States = {
     TITLE: "title",
@@ -63,7 +66,7 @@ let modeInstructions = "Press M to shift through game modes."
 * Preloads all the images and generates the random code
 */
 function preload() {
-  createCanvas(canvasX, canvasY);
+  img = loadImage('/assets/image/bathroom.jpg');
 }
 
 
@@ -251,10 +254,12 @@ function lose() {
  * Handles Key being pressed
  */
 function keyPressed() {
-  if (key === 'M' && state === States.TITLE){ // When M key is pressed in title state
+if (state = States.TITLE){
+  if (key === 'M'){ // When M key is pressed in title state
     modeCounter += 1 ; // Increase modeCounter by 1
-    if (modeCounter === 2) // If modeCounter is 2
-      modeCounter = 0 ; // set to 0
+      if (modeCounter === 2) // If modeCounter is 2
+        modeCounter = 0 ; // set to 0
+    }
   }
 }
 
@@ -262,9 +267,15 @@ function keyPressed() {
  * Handles mouse being pressed
  */
 function mousePressed() {
-  if (state === States.TITLE){
-    state === States.BATHROOM;
+  if (state = States.TITLE){
+    state = States.BATHROOM;
   }
-    
+  
+}
 
+/**
+ * In case of image loading Error
+ */
+function handleError(event) {
+  console.error('Failed to load:', event);
 }
