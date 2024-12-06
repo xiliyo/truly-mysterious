@@ -4,7 +4,7 @@
  * 
  * A point and click escape room, 
  * Find the code to escape the room!
- * If you guess wrong thrice, or fail to escape when the timer ends, you die!
+ * If you guess the code wrong thrice, you die!
  * 
  * Instructions:
  * - Click to interact with objects
@@ -132,10 +132,10 @@ function draw() {
 function modeDraw(){
    if (Modes[0]){
      mode === 'default';
-   }even if (Modes[1]){
+   } else if (Modes[1]){
      mode === 'timed';
      drawTimed();
-   }even if (Modes[1]){
+   } else if (Modes[1]){
      mode === 'flashlight';
      drawFlashlight();
    }  
