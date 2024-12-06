@@ -21,7 +21,13 @@
 /*VARIABLES---------------------------------------------------------*/ 
 
 // Initialize for later images
-let img;
+let bathroom_img;
+let toilet_img;
+let cabinetClosed_img;
+let cabinetOpen_img;
+let sink_img;
+let underSink_img;
+let bathub_img;
 
 // Canvas size for modular coding
 let canvasX = '1000';
@@ -63,15 +69,21 @@ let modeInstructions = "Press M to shift through game modes."
 /*CODE BEGINS---------------------------------------------------------*/ 
 
 /**
-* Preloads all the images and generates the random code
+* Preloads all the images
 */
 function preload() {
-  img = loadImage('/assets/image/bathroom.jpg');
+  bathroom_img = loadImage('/assets/images/bathroom.jpg');
+  toilet_img = loadImage('/assets/images/toilet.jpg');
+  cabinetClosed_img = loadImage('/assets/images/cabinet_closed.jpg');
+  cabinetOpen_img = loadImage('/assets/images/cabinet_open.jpg');
+  sink_img = loadImage('/assets/images/sink.jpg');
+  underSink_img = loadImage('/assets/images/under_sink.jpg');
+  bathub_img = loadImage('/assets/images/bathtub.jpg');
 }
 
 
 /**
-* Make canvas and set shape creation modes to center.
+* Make canvas and set shape creation modes to center and generates the random code.
 */
 function setup() {
   rectMode(CENTER);
@@ -84,12 +96,7 @@ function setup() {
 */
 function draw() {
   background(200);
-  
-  push();
-  rectMode(CENTER);
-  text(`x: ${mouseX} y: ${mouseY}`, 50, 50);
-  pop();
-  
+ 
   modeDraw();
   
   // State-based rendering
@@ -184,7 +191,10 @@ function title(){
  * Bathroom state
  */
 function bathroom() {
-  // Placeholder for bathroom scene
+  //Load the background image
+  image(bathroom_img, 0, 0);
+  describe('An image a bloodied bathroom.');
+  
 }
 
 /**
@@ -267,10 +277,15 @@ if (state = States.TITLE){
  * Handles mouse being pressed
  */
 function mousePressed() {
-  if (state = States.TITLE){
+  if (state === States.TITLE) {
     state = States.BATHROOM;
+  } else if (state === States.BATHROOM) {
+    // When area around bathtub is clicked (check if mouseX and mouseY are within the rectangle)
+    if (mouseX >= 81 && mouseX <= 356 && mouseY >= 194 && mouseY <= 248) {
+      state = States.BATHTUB;  // Change to the bathtub state
+    }
   }
-  
+}
 }
 
 /**
