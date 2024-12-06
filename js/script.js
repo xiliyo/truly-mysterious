@@ -201,42 +201,54 @@ function bathroom() {
  * Toilet state
  */
 function toilet() {
-  // Placeholder for toilet scene
+  //Load the toilet image
+  image(toilet_img, 0, 0);
+  describe('An dirty toilet.');
 }
 
 /**
  * Closed cabinet state
  */
 function cabinetClosed() {
-  // Placeholder for closed cabinet scene
+  //Load the cabinet closed image
+  image(cabinetClosed_img, 0, 0);
+  describe('A cabinet, it is closed.');
 }
 
 /**
  * Open cabinet state
  */
 function cabinetOpen() {
-  // Placeholder for open cabinet scene
+  //Load the cabinet closed image
+  image(cabinetOpen_img, 0, 0);
+  describe('A cabinet, it is open.');
 }
 
 /**
  * Sink state
  */
 function sink() {
-  // Placeholder for sink scene
+  //Load the sink image
+  image(sink_img, 0, 0);
+  describe('A dity sink and mirror.');
 }
 
 /**
  * Under sink state
  */
 function underSink() {
-  // Placeholder for under sink scene
+   //Load the sink image
+   image(underSink_img, 0, 0);
+   describe('Under the sink. A gross jar and plunger.');
 }
 
 /**
  * Bathtub state
  */
 function bathtub() {
-  // Placeholder for bathtub scene
+  //Load the bathtub image
+  image(bathub_img, 0, 0);
+  describe('A bloodied bath, and a bucket.');
 }
 
 /**
@@ -277,15 +289,23 @@ if (state = States.TITLE){
  * Handles mouse being pressed
  */
 function mousePressed() {
+  // Reactions on Title State
   if (state === States.TITLE) {
+    // Transition to bathroom state when clicked on the title screen
     state = States.BATHROOM;
+
+  // Reactions in Bathroom State
   } else if (state === States.BATHROOM) {
-    // When area around bathtub is clicked (check if mouseX and mouseY are within the rectangle)
+    // Check if mouse is inside the rectangle area (81, 194) to (356, 248)
     if (mouseX >= 81 && mouseX <= 356 && mouseY >= 194 && mouseY <= 248) {
-      state = States.BATHTUB;  // Change to the bathtub state
+      // Change to BATHTUB state
+      state = States.BATHTUB;
     }
+
+  // Reactions when not in bathroom
+  } else if (state != States.BATHROOM){
+    state = States.BATHROOM;
   }
-}
 }
 
 /**
@@ -293,4 +313,19 @@ function mousePressed() {
  */
 function handleError(event) {
   console.error('Failed to load:', event);
+}
+
+// temp
+function drawCoordinates(){
+// Style the text.
+push();
+textAlign(CENTER);
+textSize(16);
+textFont(font);
+fill(black);
+pop();
+
+// Display the mouse's coordinates.
+text(`x: ${mouseX} y: ${mouseY}`, 100, 100);
+
 }
