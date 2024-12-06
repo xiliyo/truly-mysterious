@@ -130,14 +130,22 @@ function draw() {
 */
 
 function modeDraw(){
+Modes[modeCounter];
+
    if (Modes[0]){
      mode === 'default';
+     modeInstruction = "";
+
    } else if (Modes[1]){
      mode === 'timed';
      drawTimed();
-   } else if (Modes[1]){
+     modeInstruction = "";
+   
+    } else if (Modes[2){
      mode === 'flashlight';
      drawFlashlight();
+     modeInstruction = "";
+
    }  
 }
 
@@ -145,7 +153,7 @@ function modeDraw(){
 * Draw a timer when timed mode is active.
 */
 function drawTimed(){
-  
+
 }
 
 /**
@@ -259,10 +267,10 @@ function lose() {
  * Handles Key being pressed
  */
 function keyPressed() {
-  if (key === 'M' && state === 'title'){
-    mode =  mode + 1 ;
-    if (mode === 2)
-        mode = 0 ;
+  if (key === 'M' && state === 'title'){ // When M key is pressed in title state
+    modeCounter += 1 ; // Increase modeCounter by 1
+    if (modeCounter === 2) // If modeCounter is 2
+      modeCounter = 0 ; // set to 0
   }
 }
 
