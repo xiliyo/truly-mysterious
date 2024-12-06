@@ -104,10 +104,10 @@ function draw() {
     title();
   } else if (state === States.BATHROOM) {
     bathroom();
-  } else if (state === States.CABINET_CLOSED) {
-    cabinetClosed();
-  } else if (state === States.CABINET_OPEN) {
-    cabinetOpen();
+  } else if (state === States.TOILET) {
+    toilet();
+  } else if (state === States.CABINET) {
+    cabinet();
   } else if (state === States.SINK) {
     sink();
   } else if (state === States.UNDER_SINK) {
@@ -192,8 +192,16 @@ function title(){
  */
 function bathroom() {
   //Load the background image
-  image(bathroom_img, 0, 0);
+  background(bathroom_img);
   describe('An image a bloodied bathroom.');
+
+    // Style the text.
+    textSize(24);
+    textFont('Courier New');
+    fill(255);
+  
+    // Display the mouse's coordinates.
+    text(`x: ${mouseX} y: ${mouseY}`, 50, 50);
   
 }
 
@@ -202,34 +210,26 @@ function bathroom() {
  */
 function toilet() {
   //Load the toilet image
-  image(toilet_img, 0, 0);
+  background(toilet_img);
   describe('An dirty toilet.');
 }
 
 /**
  * Closed cabinet state
  */
-function cabinetClosed() {
+function cabinet() {
   //Load the cabinet closed image
-  image(cabinetClosed_img, 0, 0);
+  background(cabinetClosed_img);
   describe('A cabinet, it is closed.');
 }
 
-/**
- * Open cabinet state
- */
-function cabinetOpen() {
-  //Load the cabinet closed image
-  image(cabinetOpen_img, 0, 0);
-  describe('A cabinet, it is open.');
-}
 
 /**
  * Sink state
  */
 function sink() {
   //Load the sink image
-  image(sink_img, 0, 0);
+  background(sink_img);
   describe('A dity sink and mirror.');
 }
 
@@ -238,7 +238,7 @@ function sink() {
  */
 function underSink() {
    //Load the sink image
-   image(underSink_img, 0, 0);
+   background(underSink_img);
    describe('Under the sink. A gross jar and plunger.');
 }
 
@@ -247,7 +247,7 @@ function underSink() {
  */
 function bathtub() {
   //Load the bathtub image
-  image(bathub_img, 0, 0);
+  background(bathub_img);
   describe('A bloodied bath, and a bucket.');
 }
 
@@ -289,19 +289,44 @@ if (state = States.TITLE){
  * Handles mouse being pressed
  */
 function mousePressed() {
-  // Reactions on Title State
+  // Reactions on Title State ----------------------
   if (state === States.TITLE) {
     // Transition to bathroom state when clicked on the title screen
     state = States.BATHROOM;
 
-  // Reactions in Bathroom State
+  // Reactions in Bathroom State ----------------------
   } else if (state === States.BATHROOM) {
-    // Check if mouse is inside the rectangle area (81, 194) to (356, 248)
-    if (mouseX >= 81 && mouseX <= 356 && mouseY >= 194 && mouseY <= 248) {
+    // Check if clicking bathtub
+    if (mouseX >= 130 && mouseX <= 521 && mouseY >= 311 && mouseY <= 420) {
       // Change to BATHTUB state
       state = States.BATHTUB;
-    }
+    
+    // Check if clicking toilet
+    } else if (mouseX >= 560 && mouseX <= 679 && mouseY >= 200 && mouseY <= 396){
+      // Change to TOILET state
+      state = States.TOILET;
+    
+    // Check if clicking sink
+    } else if (mouseX >= 810 && mouseX <= 931 && mouseY >= 120 && mouseY <= 320){
+      // Change to CABINET state
+      state = States.SINK;
+      
+    // Check if clicking sink
+    } else if (mouseX >= 810 && mouseX <= 931 && mouseY >= 120 && mouseY <= 320){
+      // Change to CABINET state
+      state = States.SINK;
 
+    // Check if clicking under sink
+    } else if (mouseX >= 810 && mouseX <= 970 && mouseY >= 321 && mouseY <= 452){
+      // Change to CABINET state
+      state = States.UNDER_SINK;
+
+     // Check if clicking cabinet
+    } else if (mouseX >= 0 && mouseX <= 145 && mouseY >= 50 && mouseY <= 250){
+      // Change to CABINET state
+      state = States.CABINET;
+
+    }
   // Reactions when not in bathroom
   } else if (state != States.BATHROOM){
     state = States.BATHROOM;
@@ -313,19 +338,4 @@ function mousePressed() {
  */
 function handleError(event) {
   console.error('Failed to load:', event);
-}
-
-// temp
-function drawCoordinates(){
-// Style the text.
-push();
-textAlign(CENTER);
-textSize(16);
-textFont(font);
-fill(black);
-pop();
-
-// Display the mouse's coordinates.
-text(`x: ${mouseX} y: ${mouseY}`, 100, 100);
-
 }
