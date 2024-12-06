@@ -251,7 +251,7 @@ function lose() {
  * Handles Key being pressed
  */
 function keyPressed() {
-  if (key === 'M' && state === 'title'){ // When M key is pressed in title state
+  if (key === 'M' && state === States.TITLE){ // When M key is pressed in title state
     modeCounter += 1 ; // Increase modeCounter by 1
     if (modeCounter === 2) // If modeCounter is 2
       modeCounter = 0 ; // set to 0
@@ -262,8 +262,8 @@ function keyPressed() {
  * Handles mouse being pressed
  */
 function mousePressed() {
-  if (state === title){
-    state = "bathroom";
+  if (state === States.TITLE){
+    state === States.BATHROOM;
   }
     
 
