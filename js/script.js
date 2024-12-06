@@ -45,7 +45,7 @@ const States = {
 
 let mode = "default";
 
-let modeIndex = '0' ;
+let modeCounter = '0' ;
 
 const Modes = ["default", "timed", "flashlightd"];
 
@@ -90,61 +90,45 @@ function draw() {
   modeDraw();
   
   // State-based rendering
-  switch(state) {
-    case States.TITLE:
-      title();
-      break;
-    case States.BATHROOM:
-      bathroom();
-      break;
-    case States.CABINET_CLOSED:
-      cabinetClosed();
-      break;
-    case States.CABINET_OPEN:
-      cabinetOpen();
-      break;
-    case States.SINK:
-      sink();
-      break;
-    case States.UNDER_SINK:
-      underSink();
-      break;
-    case States.BATHTUB:
-      bathtub();
-      break;
-    case States.DOOR:
-      door();
-      break;
-    case States.WIN:
-      win();
-      break;
-    case States.LOSE:
-      lose();
-      break;
+    if (state === States.TITLE) {
+    title();
+  } else if (state === States.BATHROOM) {
+    bathroom();
+  } else if (state === States.CABINET_CLOSED) {
+    cabinetClosed();
+  } else if (state === States.CABINET_OPEN) {
+    cabinetOpen();
+  } else if (state === States.SINK) {
+    sink();
+  } else if (state === States.UNDER_SINK) {
+    underSink();
+  } else if (state === States.BATHTUB) {
+    bathtub();
+  } else if (state === States.DOOR) {
+    door();
+  } else if (state === States.WIN) {
+    win();
+  } else if (state === States.LOSE) {
+    lose();
   }
 }
-
 
 /**
 * Senses what mode the game is in.
 */
-
 function modeDraw(){
 Modes[modeCounter];
 
    if (Modes[0]){
      mode === 'default';
-     modeInstruction = "";
 
    } else if (Modes[1]){
      mode === 'timed';
      drawTimed();
-     modeInstruction = "";
    
-    } else if (Modes[2){
+    } else if (Modes[2]){
      mode === 'flashlight';
      drawFlashlight();
-     modeInstruction = "";
 
    }  
 }
@@ -278,5 +262,9 @@ function keyPressed() {
  * Handles mouse being pressed
  */
 function mousePressed() {
+  if (state === title){
+    state = "bathroom";
+  }
+    
 
 }
