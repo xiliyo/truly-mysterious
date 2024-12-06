@@ -20,8 +20,6 @@
 
 /*VARIABLES---------------------------------------------------------*/ 
 
-/**TITLE STATE VARIABLES**/
-
 // Canvas size for modular coding
 let canvasX = '1000';
 let canvasY = '541';
@@ -47,15 +45,16 @@ const States = {
 
 let mode = "default";
 
-const Modes = [
-    "default",
-    "timed",
-    "flashlight"
-];
+let modeIndex = '0' ;
+
+const Modes = ["default", "timed", "flashlightd"];
 
 /**TITLE STATE VARIABLES**/
+
 let titleString = "TRULY MYSTERIOUS🔎";
+
 let titleInstructions = "Click anywhere to begin."
+
 let modeInstructions = "Press M to shift through game modes."  
 
 /*CODE BEGINS---------------------------------------------------------*/ 
@@ -129,15 +128,30 @@ function draw() {
 /**
 * Senses what mode the game is in.
 */
+
 function modeDraw(){
-    // Call drawTimer if timed mode is on
-    if (mode === timed){
-        drawTimer();
-    
-    // Call drawTimer if flashlight mode is on
-    } else if (mode === flashlight){
-        drawFlashlight();
-    }
+   if (Modes[0]){
+     mode === 'default';
+   }even if (Modes[1]){
+     mode === 'timed';
+     drawTimed();
+   }even if (Modes[1]){
+     mode === 'flashlight';
+     drawFlashlight();
+   }  
+}
+
+/**
+* Draw a timer when timed mode is active.
+*/
+function drawTimed(){
+  
+}
+
+/**
+* Draw a flashlight when flashlight mode is active.
+*/
+function drawFlashlight(){
   
 }
 
