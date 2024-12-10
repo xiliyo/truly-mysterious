@@ -51,7 +51,6 @@ const States = {
     BATHROOM: "bathroom",
     TOILET: "toilet",
     CABINET_CLOSED: "cabinet_closed",
-    CABINET_OPEN: "cabinet_open",
     SINK:  "sink",
     UNDER_SINK:  "under_sink",
     BATHTUB: "bathtub",
@@ -372,17 +371,26 @@ function commentary() {
     }
 }
 
-/**
- * Handles mouse being pressed
- */
+
+ /* MOUSE PRESSED FUNCTION (very long because I can't replicate this event handler) ---------------------------------------------------------*/ 
 function mousePressed() {
-  // Reactions on Title State ----------------------
+
+
+/**
+ * Reactions in Title State ----------------------
+ */
   if (state === States.TITLE) {
+
     // Transition to bathroom state when clicked on the title screen
     state = States.BATHROOM;
 
-  // Reactions in Bathroom State ----------------------
-  } else if (state === States.BATHROOM) {
+  }
+  
+/**
+ * Reactions in Bathroom State ----------------------
+ */
+   else if (state === States.BATHROOM) {
+
     // Check if clicking bathtub
     if (mouseX >= 130 && mouseX <= 521 && mouseY >= 311 && mouseY <= 420) {
       // Change to BATHTUB state
@@ -414,11 +422,91 @@ function mousePressed() {
       state = States.CABINET;
 
     }
-  // Reactions when not in bathroom
-  } else if (state != States.BATHROOM && mouseX >= 12 && mouseX <= 52 && mouseY >= 490 && mouseY <= 530){
+  }
+
+
+
+/**
+ * Reactions in Toilet State ----------------------
+ */
+   else if (state === States.TOILET) {
+
+  }
+
+
+
+/**
+ * Reactions in Cabinet State ----------------------
+ */
+   else if (state === States.CABINET) {
+
+  }
+
+
+
+/**
+ * Reactions in Sink State ----------------------
+ */
+   else if (state === States.SINK) {
+
+  }
+
+
+
+/**
+ * Reactions in Under Sink State ----------------------
+ */
+   else if (state === States.UNDER_SINK) {
+
+  }
+
+
+
+  /**
+ * Reactions in Bathtub State ----------------------
+ */
+   else if (state === States.BATHTUB) {
+
+  }
+
+
+
+  /**
+ * Reactions in Door State ----------------------
+ */
+   else if (state === States.DOOR) {
+
+  }
+
+
+
+  /**
+ * Reactions in Win State ----------------------
+ */
+   else if (state === States.WIN) {
+
+  }
+
+
+
+  /**
+ * Reactions in Lose State ----------------------
+ */
+   else if (state === States.LOSE) {
+
+  }
+
+
+
+/**
+ * Reactions for Back Button ----------------------
+ */
+   else if (state != States.BATHROOM && mouseX >= 12 && mouseX <= 52 && mouseY >= 490 && mouseY <= 530){
     state = States.BATHROOM;
   }
 }
+
+/*ERROR HANDLING ---------------------------------------------------------*/ 
 
 /**
  * In case of image loading Error
@@ -426,7 +514,6 @@ function mousePressed() {
 function handleError(event) {
   console.error('Failed to load:', event);
 }
-
 
 /**
  * Temporary function so I can map out coordinates
