@@ -1,5 +1,5 @@
 /**
- * Truly Mysterious!
+ * TRULY MYSTERIOUS🔎
  * Carael Bandojo
  * 
  * A point and click escape room, 
@@ -19,6 +19,16 @@
 "use strict";
 
 /*VARIABLES---------------------------------------------------------*/ 
+
+// Code that will allow you to solve the game
+const Code = {
+  digit1: "0",
+  digit2: "0",
+  digit3: "0",
+  digit4: "0",
+  digit5: "0",
+  digit6: "0"
+}
 
 // Initialize for later images
 let bathroom_img;
@@ -50,6 +60,18 @@ const States = {
     LOSE: "lose"
 };
 
+// Boolean objects to show the user what items they have found
+let Items = {
+  CabinetKey: false,
+  DirtyCloth: false,
+  CleanCloth: false,
+  Plunger: false,
+  HydrogenPeroxide: false,
+  PipeWrench: false,
+  Hammer: false,
+  
+}
+
 let commentaryString = "Look around to get clues.";
 
 /**MODE VARIABLES**/
@@ -67,6 +89,10 @@ let titleString = "TRULY MYSTERIOUS🔎";
 let titleInstructions = "Click anywhere to begin."
 
 let modeInstructions = "Press M to shift through game modes."  
+
+/** CABINET STATE VARIABLES **/
+
+let cabinetLocked = true;
 
 /*CODE BEGINS---------------------------------------------------------*/ 
 
@@ -88,6 +114,17 @@ function preload() {
 * Make canvas and set shape creation modes to center and generates the random code.
 */
 function setup() {
+   // Generate 6 random digits and store them in the Code object
+   Code.digit1 = floor(random(10)); // random(10) gives a number between 0 and 9
+   Code.digit2 = floor(random(10));
+   Code.digit3 = floor(random(10));
+   Code.digit4 = floor(random(10));
+   Code.digit5 = floor(random(10));
+   Code.digit6 = floor(random(10));
+ 
+   // Output the final 6-digit code so I can cheat during debugging 
+   console.log("Final Code:", Code.digit1, Code.digit2, Code.digit3, Code.digit4, Code.digit5, Code.digit6);
+
   rectMode(CENTER);
   ellipseMode(CENTER);
   createCanvas(canvasX, canvasY);
@@ -124,7 +161,19 @@ function draw() {
     lose();
   }
 
-// Draw back button
+  // Draw back button
+  drawBackButton();
+  // Draw commentary
+  commentary();
+  //DELETE LATER!! Draw coordinates
+  drawCoordinates();
+}
+
+/**
+* Draw the back button when the state isn't title, win, lose, or bathroom
+*/
+function drawBackButton() {
+  // Draw back button
  if (state != States.BATHROOM && state != States.TITLE && state != States.WIN && state != States.LOSE){
   push();
   noStroke();
@@ -132,8 +181,6 @@ function draw() {
   triangle(12, 490, 52, 510, 12, 530);
   pop();
   }
-
-  commentary();
 }
 
 /**
@@ -207,14 +254,6 @@ function bathroom() {
   //Load the background image
   background(bathroom_img);
   describe('An image a bloodied bathroom.');
-
-    // Style the text.
-    textSize(24);
-    textFont('Courier New');
-    fill(255);
-  
-    // Display the mouse's coordinates.
-    text(`x: ${mouseX} y: ${mouseY}`, 50, 50);
   
 }
 
@@ -232,6 +271,8 @@ function toilet() {
  */
 function cabinet() {
   //Load the cabinet closed image
+  
+  if (cabinetLocked = true)
   background(cabinetClosed_img);
   describe('A cabinet, it is closed.');
 }
@@ -384,4 +425,18 @@ function mousePressed() {
  */
 function handleError(event) {
   console.error('Failed to load:', event);
+}
+
+
+/**
+ * Temporary function so I can map out coordinates
+ */
+function drawCoordinates() {
+  // Style the text.
+  textSize(24);
+  textFont('Courier New');
+  fill(255);
+
+  // Display the mouse's coordinates.
+  text(`x: ${mouseX} y: ${mouseY}`, 50, 50);
 }
