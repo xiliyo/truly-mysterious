@@ -50,6 +50,8 @@ const States = {
     LOSE: "lose"
 };
 
+let commentaryString = "Look around to get clues.";
+
 /**MODE VARIABLES**/
 
 let mode = "default";
@@ -121,6 +123,17 @@ function draw() {
   } else if (state === States.LOSE) {
     lose();
   }
+
+// Draw back button
+ if (state != States.BATHROOM && state != States.TITLE && state != States.WIN && state != States.LOSE){
+  push();
+  noStroke();
+  fill('maroon');
+  triangle(12, 490, 52, 510, 12, 530);
+  pop();
+  }
+
+  commentary();
 }
 
 /**
@@ -285,6 +298,39 @@ if (state = States.TITLE){
   }
 }
 
+function commentary() {
+
+  // Commentary in Bathroom State ----------------------
+  if (state === States.BATHROOM) {
+      // Check if hovering over bathtub
+      if (mouseX >= 130 && mouseX <= 521 && mouseY >= 311 && mouseY <= 420) {
+        
+      
+      // Check if hovering over toilet
+      } else if (mouseX >= 560 && mouseX <= 679 && mouseY >= 200 && mouseY <= 396){
+     
+      
+      // Check if hovering over sink
+      } else if (mouseX >= 810 && mouseX <= 931 && mouseY >= 120 && mouseY <= 320){
+      
+        
+      // Check if hovering over sink
+      } else if (mouseX >= 810 && mouseX <= 931 && mouseY >= 120 && mouseY <= 320){
+      
+  
+      // Check if hovering under sink
+      } else if (mouseX >= 810 && mouseX <= 970 && mouseY >= 321 && mouseY <= 452){
+        
+  
+       // Check if hovering over cabinet
+      } else if (mouseX >= 0 && mouseX <= 145 && mouseY >= 50 && mouseY <= 250){
+      
+  
+      }
+      
+    }
+}
+
 /**
  * Handles mouse being pressed
  */
@@ -328,7 +374,7 @@ function mousePressed() {
 
     }
   // Reactions when not in bathroom
-  } else if (state != States.BATHROOM){
+  } else if (state != States.BATHROOM && mouseX >= 12 && mouseX <= 52 && mouseY >= 490 && mouseY <= 530){
     state = States.BATHROOM;
   }
 }
