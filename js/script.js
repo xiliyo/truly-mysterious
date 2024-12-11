@@ -40,8 +40,8 @@ let underSink_img;
 let bathub_img;
 
 // Canvas size for modular coding
-let canvasX = '1000';
-let canvasY = '541';
+let canvasX = 1000;
+let canvasY = 541;
 
 // States for each screen of the game
 let state = 'title';
@@ -77,7 +77,7 @@ let commentaryString = "Look around to get clues.";
 
 let mode = "default";
 
-let modeCounter = '0' ;
+let modeCounter = 0;
 
 const Modes = ["default", "timed", "flashlightd"];
 
@@ -162,8 +162,12 @@ function draw() {
 
   // Draw back button
   drawBackButton();
-  // Draw commentary
-  commentary();
+
+  // Draw commentary if not in title, win, or lose state
+  if (state != States.TITLE && state != States.WIN && state != States.LOSE){
+    drawCommentary();
+    }
+  
   //DELETE LATER!! Draw coordinates
   drawCoordinates();
 }
@@ -185,21 +189,16 @@ function drawBackButton() {
 /**
 * Senses what mode the game is in.
 */
-function modeDraw(){
-Modes[modeCounter];
-
-   if (Modes[0]){
-     mode === 'default';
-
-   } else if (Modes[1]){
-     mode === 'timed';
-     drawTimed();
-   
-    } else if (Modes[2]){
-     mode === 'flashlight';
-     drawFlashlight();
-
-   }  
+function modeDraw() {
+  if (modeCounter === 0) {
+    mode = 'default';
+  } else if (modeCounter === 1) {
+    mode = 'timed';
+    drawTimed();
+  } else if (modeCounter === 2) {
+    mode = 'flashlight';
+    drawFlashlight();
+  }
 }
 
 /**
@@ -271,7 +270,7 @@ function toilet() {
 function cabinet() {
   //Load the cabinet closed image
   
-  if (cabinetLocked = true)
+  if (cabinetLocked === true)
   background(cabinetClosed_img);
   describe('A cabinet, it is closed.');
 }
@@ -329,7 +328,7 @@ function lose() {
  * Handles Key being pressed
  */
 function keyPressed() {
-if (state = States.TITLE){
+if (state === States.TITLE){
   if (key === 'M'){ // When M key is pressed in title state
     modeCounter += 1 ; // Increase modeCounter by 1
       if (modeCounter === 2) // If modeCounter is 2
@@ -338,33 +337,45 @@ if (state = States.TITLE){
   }
 }
 
-function commentary() {
+function drawCommentary() {
+    // Draw a rectangle for the text to always be visible
+    push();
+    textSize(20);
+    textFont('Courier New');
+    fill(0);
+    pop();
 
-  // Commentary in Bathroom State ----------------------
+    // Style the text.
+    push();
+    textSize(14);
+    textFont('Courier New');
+    fill(0);
+    pop();
+  
+    // Display the mouse's coordinates.
+    text(commentaryString, 20, (canvasY/1.01));
+
+  // Commentary in Bathroom State (when not clicking) ----------------------
   if (state === States.BATHROOM) {
       // Check if hovering over bathtub
-      if (mouseX >= 130 && mouseX <= 521 && mouseY >= 311 && mouseY <= 420) {
-        
+        if (mouseX >= 130 && mouseX <= 521 && mouseY >= 311 && mouseY <= 420) {
+        commentaryString = "The bathtub smells of death.";
       
       // Check if hovering over toilet
       } else if (mouseX >= 560 && mouseX <= 679 && mouseY >= 200 && mouseY <= 396){
-     
-      
-      // Check if hovering over sink
-      } else if (mouseX >= 810 && mouseX <= 931 && mouseY >= 120 && mouseY <= 320){
-      
+        commentaryString = "The toilet has grime all over it.";
         
       // Check if hovering over sink
       } else if (mouseX >= 810 && mouseX <= 931 && mouseY >= 120 && mouseY <= 320){
-      
+        commentaryString = "The mirror is cloudy.";
   
       // Check if hovering under sink
       } else if (mouseX >= 810 && mouseX <= 970 && mouseY >= 321 && mouseY <= 452){
-        
+        commentaryString = "Maybe the plunger would be useful.";
   
        // Check if hovering over cabinet
       } else if (mouseX >= 0 && mouseX <= 145 && mouseY >= 50 && mouseY <= 250){
-      
+        commentaryString = "The glass is so dirty that I can't see what's inside.";
   
       }
       
@@ -400,11 +411,6 @@ function mousePressed() {
     } else if (mouseX >= 560 && mouseX <= 679 && mouseY >= 200 && mouseY <= 396){
       // Change to TOILET state
       state = States.TOILET;
-    
-    // Check if clicking sink
-    } else if (mouseX >= 810 && mouseX <= 931 && mouseY >= 120 && mouseY <= 320){
-      // Change to CABINET state
-      state = States.SINK;
       
     // Check if clicking sink
     } else if (mouseX >= 810 && mouseX <= 931 && mouseY >= 120 && mouseY <= 320){
@@ -467,6 +473,17 @@ function mousePressed() {
  */
    else if (state === States.BATHTUB) {
 
+   // Check if clicking bloodstain in tub
+    if (mouseX >= 341 && mouseX <= 521 && mouseY >= 151 && mouseY <= 345) {
+      // Change 
+      state = States.BATHTUB;
+    
+    // Check if clicking toilet
+    } else if (mouseX >= 560 && mouseX <= 679 && mouseY >= 200 && mouseY <= 396){
+      // Change to TOILET state
+      state = States.TOILET;
+
+    }
   }
 
 
@@ -503,6 +520,7 @@ function mousePressed() {
  */
    else if (state != States.BATHROOM && mouseX >= 12 && mouseX <= 52 && mouseY >= 490 && mouseY <= 530){
     state = States.BATHROOM;
+
   }
 }
 
