@@ -180,8 +180,8 @@ function drawBackButton() {
  if (state != States.BATHROOM && state != States.TITLE && state != States.WIN && state != States.LOSE){
   push();
   noStroke();
-  fill('maroon');
-  triangle(12, 490, 52, 510, 12, 530);
+  fill(255, 255, 255, 102);
+  triangle(52, 10, 12, 35, 52, 60);
   pop();
   }
 }
@@ -338,22 +338,19 @@ if (state === States.TITLE){
 }
 
 function drawCommentary() {
-    // Draw a rectangle for the text to always be visible
-    push();
-    textSize(20);
-    textFont('Courier New');
-    fill(0);
-    pop();
-
+    // When state is not title, win, or lose
+    if (state != States.TITLE && state != States.WIN && state != States.LOSE) {
     // Style the text.
     push();
     textSize(14);
+    textStyle(BOLDITALIC);
     textFont('Courier New');
-    fill(0);
-    pop();
+    fill(255);
   
     // Display the mouse's coordinates.
-    text(commentaryString, 20, (canvasY/1.01));
+    text(commentaryString, (canvasX/3), (canvasY/1.1), (canvasY));
+    pop();
+  }
 
   // Commentary in Bathroom State (when not clicking) ----------------------
   if (state === States.BATHROOM) {
@@ -362,36 +359,49 @@ function drawCommentary() {
         commentaryString = "The bathtub smells of death.";
       
       // Check if hovering over toilet
-      } else if (mouseX >= 560 && mouseX <= 679 && mouseY >= 200 && mouseY <= 396){
+      } else if (mouseX >= 560 && mouseX <= 749 && mouseY >= 200 && mouseY <= 396){
         commentaryString = "The toilet has grime all over it.";
         
       // Check if hovering over sink
       } else if (mouseX >= 810 && mouseX <= 931 && mouseY >= 120 && mouseY <= 320){
         commentaryString = "The mirror is cloudy.";
-  
-      // Check if hovering under sink
+      
+        // Check if hovering under sink
       } else if (mouseX >= 810 && mouseX <= 970 && mouseY >= 321 && mouseY <= 452){
-        commentaryString = "Maybe the plunger would be useful.";
-  
+        commentaryString = "I wonder if I could use this plunger..";
+
        // Check if hovering over cabinet
       } else if (mouseX >= 0 && mouseX <= 145 && mouseY >= 50 && mouseY <= 250){
         commentaryString = "The glass is so dirty that I can't see what's inside.";
   
+        // Check if close enough to border to go to door
+      } else if (mouseX >= 40 && mouseX <= 960 && mouseY >= 30 && mouseY <= 507){
+        commentaryString = "Hover to examine, click to interact.";
+     
+      } else {
+        commentaryString = "What's behind me?";
       }
-      
     }
+
 }
+
 
 
  /* MOUSE PRESSED FUNCTION (very long because I can't replicate this event handler) ---------------------------------------------------------*/ 
 function mousePressed() {
 
+/**
+ * Reactions for Back Button ----------------------
+ */
+ if (state != States.BATHROOM && mouseX >= 12 && mouseX <= 52 && mouseY >= 10 && mouseY <= 60){
+  state = States.BATHROOM;
+}
+
 
 /**
  * Reactions in Title State ----------------------
  */
-  if (state === States.TITLE) {
-
+  else if (state === States.TITLE) {
     // Transition to bathroom state when clicked on the title screen
     state = States.BATHROOM;
 
@@ -408,7 +418,7 @@ function mousePressed() {
       state = States.BATHTUB;
     
     // Check if clicking toilet
-    } else if (mouseX >= 560 && mouseX <= 679 && mouseY >= 200 && mouseY <= 396){
+    } else if (mouseX >= 560 && mouseX <= 749 && mouseY >= 200 && mouseY <= 396){
       // Change to TOILET state
       state = States.TOILET;
       
@@ -427,7 +437,15 @@ function mousePressed() {
       // Change to CABINET state
       state = States.CABINET;
 
+      // Check if close enough to border to go to door
+    } else if (mouseX >= 40 && mouseX <= 960 && mouseY >= 30 && mouseY <= 507){
+      
+
+    } else {
+      commentaryString = "What's behind me?";
+      state = States.DOOR;
     }
+
   }
 
 
@@ -513,15 +531,6 @@ function mousePressed() {
 
   }
 
-
-
-/**
- * Reactions for Back Button ----------------------
- */
-   else if (state != States.BATHROOM && mouseX >= 12 && mouseX <= 52 && mouseY >= 490 && mouseY <= 530){
-    state = States.BATHROOM;
-
-  }
 }
 
 /*ERROR HANDLING ---------------------------------------------------------*/ 
