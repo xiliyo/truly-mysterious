@@ -383,6 +383,11 @@ function drawCommentary() {
       }
     }
 
+  // // Commentary in Bathroom State (when not clicking) ----------------------  
+  //   else if () {
+
+  //   }
+
 }
 
 
@@ -534,13 +539,6 @@ function mousePressed() {
 }
 
 /*ERROR HANDLING ---------------------------------------------------------*/ 
-
-/**
- * In case of image loading Error
- */
-function handleError(event) {
-  console.error('Failed to load:', event);
-}
 
 /**
  * Temporary function so I can map out coordinates
