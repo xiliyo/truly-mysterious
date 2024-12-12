@@ -437,7 +437,7 @@ function mousePressed() {
       // Change to CABINET state
       state = States.CABINET;
 
-      // Check if close enough to border to go to door
+      // Check if close enough to border to go to door, if not do nothing
     } else if (mouseX >= 40 && mouseX <= 960 && mouseY >= 30 && mouseY <= 507){
       
 
