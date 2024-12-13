@@ -99,13 +99,13 @@ let cabinetLocked = true;
 * Preloads all the images
 */
 function preload() {
-  bathroom_img = loadImage('/assets/images/bathroom.jpg');
-  toilet_img = loadImage('/assets/images/toilet.jpg');
-  cabinetClosed_img = loadImage('/assets/images/cabinet_closed.jpg');
-  cabinetOpen_img = loadImage('/assets/images/cabinet_open.jpg');
-  sink_img = loadImage('/assets/images/sink.jpg');
-  underSink_img = loadImage('/assets/images/under_sink.jpg');
-  bathub_img = loadImage('/assets/images/bathtub.jpg');
+  bathroom_img = loadImage('https://github.com/xiliyo/truly-mysterious/blob/main/assets/images/bathroom.jpg');
+  toilet_img = loadImage('https://github.com/xiliyo/truly-mysterious/blob/main/assets/images/toilet.jpg');
+  cabinetClosed_img = loadImage('https://github.com/xiliyo/truly-mysterious/blob/main/assets/images/cabinet_closed.jpg');
+  cabinetOpen_img = loadImage('https://github.com/xiliyo/truly-mysterious/blob/main/assets/images/cabinet_open.jpg');
+  sink_img = loadImage('https://github.com/xiliyo/truly-mysterious/blob/main/assets/images/sink.jpg');
+  underSink_img = loadImage('https://github.com/xiliyo/truly-mysterious/blob/main/assets/images/under_sink.jpg');
+  bathub_img = loadImage('https://github.com/xiliyo/truly-mysterious/blob/main/assets/images/bathtub.jpg');
 }
 
 
